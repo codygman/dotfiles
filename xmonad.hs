@@ -37,8 +37,9 @@ myLayoutHook = onWorkspace "5:vid" fullL $ onWorkspace "9:games" fullL $ standar
  
 main = do
   spawn "wpa_gui"
-  spawn "trayer --edge top --align right --expand false --width 9 --transparent true --alpha 0 --tint 0x000000 --height 16"
+  spawn "trayer --edge top --align right --expand false --width 13 --transparent true --alpha 0 --tint 0x000000 --height 17"
   spawn "gtk-redshift"
+  spawn "toggl-desktop"
 
   xmproc <- spawnPipe "/usr/local/bin/xmobar /home/cody/.xmonad/xmobarrc"
   xmonad $  ewmh defaultConfig {
@@ -57,5 +58,5 @@ main = do
              , ("<Print>", spawn "import -window ROOT /home/cody/Pictures/screenshots/$(date +'%s')-fullscreen.png; aplay /home/cody/sounds/camera-shutter-click.wav")
              , ("S-<Print>", spawn "import /home/cody/Pictures/screenshots/$(date +'%s').png; aplay /home/cody/sounds/camera-shutter-click.wav")
              , ("M-S-p", spawn "strings /dev/urandom | grep -o '[[:alnum:]]' | head -n 12 | tr -d '\n' | xclip -i")
-             , ("M-q", spawn "killall redshift; killall trayer; killall wpa_gui; xmonad --recompile; xmonad --restart")
+             , ("M-q", spawn "killall redshift; killall trayer; killall wpa_gui; killall toggl; xmonad --recompile; xmonad --restart")
              ]
