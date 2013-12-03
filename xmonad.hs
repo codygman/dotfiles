@@ -36,6 +36,7 @@ myLayoutHook = onWorkspace "5:vid" fullL $ onWorkspace "9:games" fullL $ standar
 
  
 main = do
+  spawn "wpa_gui"
   spawn "trayer --edge top --align right --expand false --width 9 --transparent true --alpha 0 --tint 0x000000 --height 16"
   spawn "gtk-redshift"
 
@@ -53,7 +54,8 @@ main = do
              `additionalKeysP`
              [ ("M-S-h", sendMessage ToggleStruts) 
              , ("M-S-z", spawn "slock")
-             , ("M-s", spawn "import /home/cody/screenshots/$(date +'%s').png")
-             , ("M-S-s", spawn "import -window ROOT /home/cody/screenshots/$(date +'%s')-fullscreen.png")
-             , ("M-q", spawn "killall trayer; killall gtk-redshift; xmonad --recompile; xmonad --restart")
+             , ("<Print>", spawn "import -window ROOT /home/cody/Pictures/screenshots/$(date +'%s')-fullscreen.png; aplay /home/cody/sounds/camera-shutter-click.wav")
+             , ("S-<Print>", spawn "import /home/cody/Pictures/screenshots/$(date +'%s').png; aplay /home/cody/sounds/camera-shutter-click.wav")
+             , ("M-S-p", spawn "strings /dev/urandom | grep -o '[[:alnum:]]' | head -n 12 | tr -d '\n' | xclip -i")
+             , ("M-q", spawn "killall redshift; killall trayer; killall wpa_gui; xmonad --recompile; xmonad --restart")
              ]
