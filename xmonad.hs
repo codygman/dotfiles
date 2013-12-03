@@ -37,7 +37,7 @@ myLayoutHook = onWorkspace "5:vid" fullL $ onWorkspace "9:games" fullL $ standar
  
 main = do
   spawn "wpa_gui"
-  spawn "trayer --edge top --align right --expand false --width 13 --transparent true --alpha 0 --tint 0x000000 --height 17"
+  spawn "trayer --edge top --align right --expand false --width 9 --transparent true --alpha 0 --tint 0x000000 --height 17"
   spawn "gtk-redshift"
   spawn "toggl-desktop"
 
