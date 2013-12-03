@@ -1,0 +1,16 @@
+Config { font = "-*-fixed-medium-r-normal-*-13-*-*-*-*-*-*-*"
+       , bgColor = "black"
+       , fgColor = "grey"
+       , position = TopW L 90
+       , commands = [ Run Cpu ["-L","3","-H","50","--normal","skyblue","--high","red","-l","skyblue"] 10 
+                    , Run Memory ["-t","Mem: <usedratio>%","-L","5","-H","50","-h","red","-l","skyblue","-n","skyblue"] 10
+                    , Run Swap ["-H","5","-L","1","-h","red","-l","skyblue", "-n","skyblue"] 10
+		    , Run ThermalZone 0 ["-t","gfx0: <temp>C", "-L","55","-H","75","-h","red","-l","skyblue","-n","skyblue"] 30
+                    -- , Run ssid "iwconfig" -- show essid of current network
+                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    , Run StdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% }{ %cpu% | %memory% * %swap% | %thermal0%   <fc=skyblue>%date%</fc>" 
+       }
