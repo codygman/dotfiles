@@ -3,6 +3,27 @@
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
+
+;; markdown-mode
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+;; keyboard shortcuts
+(global-set-key (kbd "C-c a r") 'align-regexp)
+(global-set-key (kbd "C-c r r") 'replace-regexp)
+(global-set-key (kbd "C-c r b") 'rename-buffer)
+(global-set-key (kbd "C-c e b") 'eval-buffer)
+(global-set-key (kbd "C-c c r") 'comment-region)
+(global-set-key (kbd "C-c u r") 'uncomment-region)
+(global-set-key (kbd "C-c r s") 'replace-string)
+
+;; set re default mode to string syntax
+(require 're-builder)
+(setq reb-re-syntax 'string)
+
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 (setq uniquify-separator "/")
