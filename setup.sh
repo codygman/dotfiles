@@ -1,5 +1,5 @@
 mkdir -p ~/.config
 mkdir -p ~/.xmonad
-ln -s redshift.conf ~/.config
-ln -s xmobarrc ~/.xmonad/
-ln -s xmonad.hs ~/.xmonad/
+ln -rs redrshift.conf ~/.config
+ln -rs xmobarrc ~/.xmonad/
+ln -rs xmonad.hrs ~/.xmonad/

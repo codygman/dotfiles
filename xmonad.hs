@@ -1,18 +1,18 @@
-import XMonad
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.ManageDocks
-import XMonad.Layout.PerWorkspace (onWorkspace)
-import XMonad.Layout.Grid
-import XMonad.Layout.ResizableTile
-import XMonad.Layout.NoBorders
-import XMonad.Layout.Reflect
-import XMonad.Hooks.ManageHelpers
-import XMonad.Layout.NoBorders
-import XMonad.Layout.Gaps
-import XMonad.Util.Run(spawnPipe)
-import XMonad.Util.EZConfig(additionalKeysP)
-import System.IO
+import           System.IO
+import           XMonad
+import           XMonad.Hooks.DynamicLog
+import           XMonad.Hooks.EwmhDesktops
+import           XMonad.Hooks.ManageDocks
+import           XMonad.Hooks.ManageHelpers
+import           XMonad.Layout.Gaps
+import           XMonad.Layout.Grid
+import           XMonad.Layout.NoBorders
+import           XMonad.Layout.NoBorders
+import           XMonad.Layout.PerWorkspace  (onWorkspace)
+import           XMonad.Layout.Reflect
+import           XMonad.Layout.ResizableTile
+import           XMonad.Util.EZConfig        (additionalKeysP)
+import           XMonad.Util.Run             (spawnPipe)
 
 myManageHook = composeAll
 		[ title =? "plugin-container"             --> doFullFloat
@@ -21,7 +21,7 @@ myManageHook = composeAll
                 , className =? "Team Fortress 2 - OpenGL" --> doShift "9:games"
 		]
 
-myLayoutHook = onWorkspace "5:vid" fullL $ onWorkspace "9:games" fullL $ standardLayouts	
+myLayoutHook = onWorkspace "5:vid" fullL $ onWorkspace "9:games" fullL $ standardLayouts
   where
     standardLayouts = avoidStruts (tiled ||| Mirror tiled ||| Grid ||| Full ) ||| Full
     -- Note the bracketing - means there are two fulls. One that respects the
@@ -34,14 +34,15 @@ myLayoutHook = onWorkspace "5:vid" fullL $ onWorkspace "9:games" fullL $ standar
     -- Fullscreen:
     fullL        	= noBorders Full
 
- 
+
 main = do
   spawn "wpa_gui"
-  spawn "trayer --edge top --align right --expand false --width 9 --transparent true --alpha 0 --tint 0x000000 --height 17"
+      -- trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --tint 0x191970 --height 12 &
+  spawn "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x000000 --height 17"
   spawn "gtk-redshift"
   spawn "toggl-desktop"
 
-  xmproc <- spawnPipe "/usr/local/bin/xmobar /home/cody/.xmonad/xmobarrc"
+  xmproc <- spawnPipe "xmobar /home/cody/.xmonad/xmobarrc"
   xmonad $  ewmh defaultConfig {
                modMask = mod4Mask,
                terminal = "urxvt",
@@ -53,7 +54,7 @@ main = do
                          }
              }
              `additionalKeysP`
-             [ ("M-S-h", sendMessage ToggleStruts) 
+             [ ("M-S-h", sendMessage ToggleStruts)
              , ("M-S-z", spawn "slock")
              , ("<Print>", spawn "import -window ROOT /home/cody/Pictures/screenshots/$(date +'%s')-fullscreen.png; aplay /home/cody/sounds/camera-shutter-click.wav")
              , ("S-<Print>", spawn "import /home/cody/Pictures/screenshots/$(date +'%s').png; aplay /home/cody/sounds/camera-shutter-click.wav")
