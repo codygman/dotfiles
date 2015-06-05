@@ -36,7 +36,7 @@
     ;; lcs
     ;; lui
     magit
-    ;; markdown-mode
+    markdown-mode
     ;; multiple-cursors
     ;; pastebin
     ;; pivotal-tracker
