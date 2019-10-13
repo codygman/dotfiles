@@ -9,7 +9,8 @@ in
 
   services = {
     emacs = {
-      enable = true;
+      # emacs service not available on darwin?
+      enable = (if stdenv.isDarwin then false else true);
     };
 
     syncthing = {
