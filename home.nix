@@ -92,9 +92,9 @@ in
     haskellPackages.cabal-install
   ] ++ (if stdenv.isDarwin then [] else [steam]);
 
-  systemd.user.startServices = true;
+  systemd.user.startServices = (if stdenv.isDarwin then false else true);
 
-  xsession = {
+  xsession = (if stdenv.isDarwin then {} else {
     enable = (if stdenv.isDarwin then false else true);
     windowManager.xmonad = {
       enable = true;
@@ -104,28 +104,28 @@ in
       ];
       config = ~/dotfiles/xmonad/xmonad.hs;
     };
-  };
+  });
 
-  home.keyboard = {
+  home.keyboard = (if stdenv.isDarwin then {} else {
     layout = "us";
     options = [
       "ctrl:nocaps"
     ];
-  };
+  });
 
-  home.sessionVariables = {
+  home.sessionVariables = (if stdenv.isDarwin then {} else {
     EDITOR = "emacsclient --create-frame --alternate-editor emacs";
-  };
+  });
 
 
-  accounts.email.accounts = {
+  accounts.email.accounts = (if stdenv.isDarwin then {} else {
     "codygman.consulting@gmail.com" = {
       primary = true;
       address = "codygman.consulting@gmail.com";
       userName = "codygman.consulting@gmail.com";
       realName = "Cody Goodman";
     };
-  };
+  });
 
   # accounts.email.accounts = {
   #     "codygman.consulting@gmail.com" = {
