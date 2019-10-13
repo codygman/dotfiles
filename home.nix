@@ -8,13 +8,12 @@ let
 in
 {
 
-  services = {
+  services = (if stdenv.isDarwin then {} else {
 
-    # mkIf stdenv.isLinux emacs = {
-    #   # emacs service not available on darwin?
-    #   enable = true;
-    # };
-    
+    emacs = {
+      # emacs service not available on darwin?
+      enable = true;
+    };
 
     syncthing = {
       enable = true;
@@ -35,7 +34,15 @@ in
       #   night = "0.65";
       # };
     };
-  };
+
+    gpg-agent = {
+      enable = true;
+      defaultCacheTtl = 1800;
+      enableSshSupport = true;
+    };
+
+
+  });
 
 
   programs = {
@@ -86,12 +93,6 @@ in
   ] ++ (if stdenv.isDarwin then [] else [steam]);
 
   systemd.user.startServices = true;
-
-  services.gpg-agent = {
-    enable = true;
-    defaultCacheTtl = 1800;
-    enableSshSupport = true;
-  };
 
   xsession = {
     enable = (if stdenv.isDarwin then false else true);
