@@ -65,7 +65,7 @@ in
       userEmail = "codygman.consulting@gmail.com";
     };
     htop.enable = true;
-    firefox.enable = true; # todo install with home-manager
+    firefox.enable = (if stdenv.isDarwin then false else true); # todo install with home-manager
     vim.enable = true;
     jq.enable = true;
     # notmuch = {
