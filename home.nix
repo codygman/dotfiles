@@ -1,6 +1,7 @@
 { config, pkgs, home, ... }:
 
 with import <nixpkgs> {};
+with lib;
 
 let
   emacsHEAD = import ./emacs.nix;
@@ -8,10 +9,12 @@ in
 {
 
   services = {
-    emacs = {
-      # emacs service not available on darwin?
-      enable = (if stdenv.isDarwin then false else true);
-    };
+
+    # mkIf stdenv.isLinux emacs = {
+    #   # emacs service not available on darwin?
+    #   enable = true;
+    # };
+    
 
     syncthing = {
       enable = true;
